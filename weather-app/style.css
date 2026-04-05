@@ -18,9 +18,9 @@ body {
   justify-content: center;
   flex-direction: column;
   width: 500px;
-  height: 600px;
   background: linear-gradient(45deg, rgb(64, 3, 122), rgb(115, 115, 179));
   border-radius: 10px;
+  padding: 20px;
 }
 
 .search-input {
@@ -52,9 +52,14 @@ body {
   background: #d6eb1a;
 }
 
+.error {
+  color: rgb(237, 221, 221);
+  padding: 20px;
+}
+
 .weather {
   color: whitesmoke;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;

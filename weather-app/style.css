@@ -55,6 +55,7 @@ body {
 .error {
   color: rgb(237, 221, 221);
   padding: 20px;
+  display: none;
 }
 
 .weather {

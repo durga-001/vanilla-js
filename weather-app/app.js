@@ -19,8 +19,10 @@ async function checkWeather(city) {
 
     document.querySelector(".city").innerHTML = data.name;
     document.querySelector(".temp").innerHTML = data.main.temp + "&deg;C";
-    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-    document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+    document.querySelector(".humidity").innerHTML =
+      "Humidity: " + data.main.humidity + "%";
+    document.querySelector(".wind").innerHTML =
+      "Wind: " + data.wind.speed + " km/h";
 
     if (data.weather[0].main === "Clear") {
       icon.src = "images/clear.png";

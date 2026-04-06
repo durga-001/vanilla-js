@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #42bcf5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: linear-gradient(135deg, #03699c, #629ad1);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+li {
+  list-style: none;
+}

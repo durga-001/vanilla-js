@@ -6,18 +6,74 @@
 
 body {
   min-height: 100vh;
-  background: #42bcf5;
+  background: linear-gradient(135deg, #200fdd, #629ad1);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .container {
-  background: linear-gradient(135deg, #03699c, #629ad1);
   padding: 20px;
   border-radius: 20px;
+  background: white;
 }
 
 li {
   list-style: none;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 4px 7px 4px;
+  border-radius: 20px;
+}
+
+button {
+  background: rgb(196, 11, 159);
+  color: white;
+  border-radius: 20px;
+  border: none;
+  padding: 4px 7px 4px;
+}
+button:hover {
+  background: rgb(233, 44, 170);
+}
+
+li {
+  font-size: 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  position: relative;
+  padding-left: 25px;
+}
+
+li::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-image: url("unchecked.png");
+  background-size: cover;
+  background-position: center;
+  left: 0;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: #555;
+}
+
+.checked::before {
+  background-image: url("checked.png");
 }

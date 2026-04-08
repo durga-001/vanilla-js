@@ -5,19 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
   </head>
   <body>
     <div class="container">
       <h2>To-do List</h2>
       <div class="box">
-        <input type="text" placeholder="Add your task here" id="input" />
+        <input type="text" placeholder="Add your task here" class="inp" />
         <button onclick="addTask()">Add</button>
       </div>
 
-      <ul id="list">
-        <li class="checked">This is my task added!</li>
-        <li>Not checked</li>
-      </ul>
+      <ul class="list"></ul>
     </div>
   </body>
 </html>

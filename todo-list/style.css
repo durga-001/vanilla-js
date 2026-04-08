@@ -18,10 +18,6 @@ body {
   background: white;
 }
 
-li {
-  list-style: none;
-}
-
 .box {
   display: flex;
   align-items: center;
@@ -50,6 +46,10 @@ button:hover {
 }
 
 li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 15px;
   margin-bottom: 5px;
   cursor: pointer;

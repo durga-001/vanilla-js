@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financial Risk & Portfolio Analysis - Durga</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 40px;
+        background-color: #f0f2f5;
+        color: #333;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+      }
+      .card {
+        background: white;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #1a5276;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .metric {
+        font-size: 1.2rem;
+        margin: 10px 0;
+      }
+      .metric b {
+        color: #2980b9;
+      }
+      canvas {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h2>Zomato vs Swiggy: Metric Space Analysis</h2>
+        <div class="metric">
+          <b>Euclidean Distance (L²):</b> <span id="euclidean"></span>
+        </div>
+        <div class="metric">
+          <b>Manhattan Distance (L¹):</b> <span id="manhattan"></span>
+        </div>
+        <div class="metric">
+          <b>Similarity Score:</b> <span id="simScore"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Return Distribution Chart</h2>
+        <canvas id="chart"></canvas>
+      </div>
+    </div>
+
+    <script>
+      // Price Data Vectors (20 Trading Days)
+      const Z_PRICES = [
+        175, 182, 178, 195, 210, 205, 220, 215, 230, 245, 240, 235, 250, 260,
+        248, 255, 270, 262, 275, 200,
+      ];
+      const S_PRICES = [
+        390, 385, 400, 410, 395, 420, 415, 430, 425, 440, 448, 435, 455, 460,
+        450, 470, 465, 480, 472, 490,
+      ];
+
+      // 1. Calculate Returns (%)
+      function calculateReturns(prices) {
+        let returns = [];
+        for (let i = 1; i < prices.length; i++) {
+          returns.push(((prices[i] - prices[i - 1]) / prices[i - 1]) * 100);
+        }
+        return returns;
+      }
+
+      // 2. Metric Calculations
+      // Euclidean Distance: sqrt(sum((zi - si)^2))
+      let euclidean = Math.sqrt(
+        Z_PRICES.reduce((sum, z, i) => sum + Math.pow(z - S_PRICES[i], 2), 0),
+      );
+
+      // Manhattan Distance: sum(|zi - si|)
+      let manhattan = Z_PRICES.reduce(
+        (sum, z, i) => sum + Math.abs(z - S_PRICES[i]),
+        0,
+      );
+
+      // Similarity Score (Normalized)
+      let similarity = 100 * (1 - euclidean / (euclidean * 1.5));
+
+      // Display Results
+      document.getElementById("euclidean").innerText = euclidean.toFixed(2);
+      document.getElementById("manhattan").innerText = manhattan.toFixed(2);
+      document.getElementById("simScore").innerText =
+        similarity.toFixed(2) + "%";
+
+      // 3. Chart Configuration
+      const ctx = document.getElementById("chart").getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: Z_PRICES.slice(1).map((_, i) => "Day " + (i + 1)),
+          datasets: [
+            {
+              label: "Zomato Returns (%)",
+              data: calculateReturns(Z_PRICES),
+              borderColor: "#e74c3c",
+              backgroundColor: "rgba(231, 76, 60, 0.1)",
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true,
+            },
+            {
+              label: "Swiggy Returns (%)",
+              data: calculateReturns(S_PRICES),
+              borderColor: "#3498db",
+              backgroundColor: "rgba(52, 152, 219, 0.1)",
+              borderWidth: 2,
+              tension: 0.3,
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: "top" },
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: { display: true, text: "Percentage Return" },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
